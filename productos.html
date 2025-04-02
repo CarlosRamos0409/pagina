@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Productos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+
+  <style>
+    body {
+      
+      margin: 0;
+      padding: 0;
+    
+      height: 100vh;
+      /* Ajusta la altura a la ventana */
+    }
+  
+    /* Estilo para las tarjetas */
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 255);
+      margin: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    /* Estilos para igualar altura de los contenidos */
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      /* Asegura que el cuerpo de la tarjeta crezca para ocupar el espacio disponible */
+    }
+.card-header{
+  color: white;
+  background: rgb(2,0,36);
+background: linear-gradient(0deg, rgba(2,0,36,0.6979166666666667) 0%, rgba(31,31,117,1) 56%, rgba(0,212,255,1) 100%);
+}
+    /* Alinear los botones al final del card */
+    .card-footer {
+      margin-top: auto;
+      /* Empuja los botones hacia la parte inferior */
+      padding: 10px;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    /* Para dar un efecto al pasar el mouse */
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Usar clamp() para texto responsivo dentro de las tarjetas */
+    .card-title {
+      font-size: clamp(1.25rem, 5vw, 2rem);
+      /* Ajusta entre 1.25rem y 2rem */
+      text-align: center;
+      /* Centra el título */
+    }
+
+    .card-text {
+      font-size: clamp(0.875rem, 4vw, 1.25rem);
+      /* Ajusta entre 0.875rem y 1.25rem */
+    }
+
+    .contenedor {
+      width: 100%;
+      /* Ancho uniforme */
+      height: 200px;
+      /* Altura uniforme */
+      position: relative;
+      /* Posici�n relativa para superponer im�genes */
+      overflow: hidden;
+      /* Oculta cualquier exceso */
+    }
+
+    .contenedor img {
+      width: 100%;
+      /* Asegura que las im�genes se ajusten al contenedor */
+      height: 200px;
+      /* Misma altura para todas */
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.3s ease;
+      /* Transici�n suave */
+    }
+
+    .contenedor img.imagen-hover {
+      opacity: 0;
+      /* La imagen secundaria es invisible por defecto */
+    }
+
+    .contenedor:hover img.imagen-hover {
+      opacity: 1;
+      /* La imagen secundaria aparece al pasar el cursor */
+    }
+
+    .contenedor:hover img.imagen-principal {
+      opacity: 0;
+      /* La imagen principal desaparece */
+    }
+
+    .linea-sombra {
+      height: 2px;
+      background-color: #3e05c2;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin: 20px 0;
+    }
+
+
+    h1 {
+      font-size: clamp(1.25rem, 5vw, 2rem);
+      /* Ajusta entre 1.25rem y 2rem */
+      text-align: center;
+      /* Centra el título */
+      
+    }
+
+    .image-container {
+      display: flex;
+      /* Usamos Flexbox */
+      justify-content: center;
+      /* Centra las imágenes horizontalmente */
+      gap: 20px;
+      /* Espacio entre las imágenes */
+      flex-wrap: wrap;
+      /* Permite que los elementos se ajusten en filas */
+    }
+
+    .image-container img {
+      width: 45%;
+      /* Controlamos el ancho de las imágenes */
+      height: auto;
+      /* Mantenemos la proporción original */
+      border-radius: 8px;
+      /* Opcional, para bordes redondeados */
+    }
+
+    /* Media query para pantallas pequeñas (menos de 768px) */
+    @media (max-width: 768px) {
+      .image-container {
+        flex-direction: column;
+        /* Apila las imágenes verticalmente */
+        align-items: center;
+        /* Centra las imágenes en el eje horizontal */
+      }
+
+      .image-container img {
+        width: 90%;
+        /* Las imágenes ocuparán el 90% del ancho del contenedor */
+      }
+    }
+
+    /* Botones del carousel */
+    .container {
+      padding: 20px;
+      background: #fff;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: rgba(0, 0, 255, 0.8);
+      /* Cambia el color del fondo (azul semitransparente) */
+      background-size: 80%;
+      /* Asegura que el ícono llene el contenedor */
+      border-radius: 50%;
+      /* Opcional: hace redonda el área del ícono */
+      
+    }
+
+    .carousel-control-prev-icon:hover,
+    .carousel-control-next-icon:hover {
+      background-color: rgba(0, 0, 128, 0.8);
+      /* Cambio de color al hacer hover */
+      
+    }
+
+
+    /* Botón Primario */
+.btn-custom-primary {
+    background-color: #4CAF50; /* Verde elegante */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 30px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    transition: all 0.3s ease-in-out; /* Animación suave */
+}
+
+.btn-custom-primary:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el cursor */
+    color: #f8f9fa; /* Texto más claro */
+    transform: scale(1.1); /* Ligera ampliación */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+}
+
+/* Botón Secundario */
+.btn-custom-secondary {
+    background-color: #2196F3; /* Azul vivo */
+    color: white;
+    border: 2px solid #0b7dda; /* Borde azul oscuro */
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-custom-secondary:hover {
+    background-color: #1e88e5; /* Azul más oscuro */
+    color: #f8f9fa; /* Texto más claro */
+    transform: scale(1.1);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.neon-basico-fusionado {
+  padding: 5px;
+        background: black;
+      color: white;
+      border-radius: 15px;
+   box-shadow: 0 0 8px 4px #2414ff, 0 0 12px 4px #0CFFF4;
+}
+.carousel-inner{
+  padding: 15px;
+}
+  </style>
+
+
+</head>
+
+<body>
+
+  <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <!-- First slide -->
+      <div class="carousel-item active">
+        <div class="container">
+          <div class="row justify-content-center g-4">
+            <!-- Include the 3 cards here -->
+            <!-- Card 1 -->
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Diseño</h4>
+                </div>
+
+                <div class="card-body">
+                  <div class="contenedor">
+                    <img src="imagenes/descarga.jpg" class="imagen-principal" alt="Imagen Principal">
+                    <img src="imagenes/descarga (3).jpg" class="imagen-hover" alt="Imagen Hover">
+                  </div>
+                  <h1 class="card-title pricing-card-title">$ 801.999 <br> <small class="text-muted">14% OFF</small>
+                  </h1>
+                  <p class="card-text">Ultrabook gamer 15-fc0037wm 15.6" color azul 8GB de Ram - 256GB SSD - AMD Ryzen 5
+                  </p>
+                  <div class="card-footer">
+                    <a type="button" class="btn btn-custom-secondary" target="_blank"
+                      href="https://www.mercadolibre.com.ar/ultrabook-gamer-15-fc0037wm-156-color-azul-8gb-de-ram-256gb-ssd-amd-ryzen-5/p/MLA33783344?pdp_filters=item_id:MLA2021165450#is_advertising=true&searchVariation=MLA33783344&position=1&search_layout=stack&type=pad&tracking_id=34d75327-0270-46ea-b901-20c3e3434536&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=1&ad_click_id=NWEyNjQyNzgtZTUyMC00N2Q0LThiZWItYzUzYzU5OTNiOWUx">
+                      Comprar<i class="bi bi-cart" style="padding-left: 5px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Diseño</h4>
+                </div>
+
+                <div class="card-body">
+                  <div class="contenedor">
+                    <img src="imagenes/descarga (1).jpg" class="imagen-principal" alt="Imagen Principal">
+                    <img src="imagenes/descarga (4).jpg" class="imagen-hover" alt="Imagen Hover">
+                  </div>
+                  <h1 class="card-title pricing-card-title">$ 485.999 <br> <small class="text-muted">46% OFF</small>
+                  </h1>
+                  <p class="card-text">Pc Armada Gamer Amd Ryzen 7 De 8/16 Nucleos 16gb Ram Ssd 480</p>
+                  <div class="card-footer">
+                    <a type="button" class="btn btn-custom-secondary" target="_blank"
+                      href="https://articulo.mercadolibre.com.ar/MLA-932296520-pc-armada-gamer-amd-ryzen-7-de-816-nucleos-16gb-ram-ssd-480-_JM#polycard_client=search-nordic&position=19&search_layout=grid&type=item&tracking_id=f5bacb6b-50e5-4787-86dc-71ee2938a3cc">
+                      Comprar<i class="bi bi-cart" style="padding-left: 5px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Gamer</h4>
+                </div>
+
+                <div class="card-body">
+                  <div class="contenedor">
+                    <img src="imagenes/descarga (2).jpg" class="imagen-principal" alt="Imagen Principal">
+                    <img src="imagenes/descarga (5).jpg" class="imagen-hover" alt="Imagen Hover">
+                  </div>
+                  <h1 class="card-title pricing-card-title">$ 702.799 </h1>
+                  <p class="card-text">Pc Armada Gamer Cpu Amd Ryzen 5 4600g 1tb Ssd 32g Ram Ver2.0</p>
+                  <div class="card-footer">
+                    <a type="button" class="btn btn-custom-secondary" target="_blank"
+                      href="https://articulo.mercadolibre.com.ar/MLA-1426302668-pc-armada-gamer-cpu-amd-ryzen-5-4600g-1tb-ssd-32g-ram-ver20-_JM#polycard_client=recommendations_vip-pads-up&reco_backend=vip-pads-up-experimental-a_marketplace&reco_model=ranker_entity_v2_retrieval_system_vip_pads_up&reco_client=vip-pads-up&reco_item_pos=1&reco_backend_type=low_level&reco_id=1e298d02-055c-477c-9229-0c8a5a86f7cf&wid=MLA1426302668&sid=recos&is_advertising=true&ad_domain=VIPDESKTOP_UP&ad_position=2&ad_click_id=MzJkYTlhZGItMGM2Yi00YTRmLTk0NDYtNTRmYjkwYWMwMTg0">
+                      Comprar<i class="bi bi-cart" style="padding-left: 5px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second slide -->
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row justify-content-center g-4">
+            <!-- Include the same 3 cards again -->
+            <!-- Card 4 (Duplicate of Card 1) -->
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Diseño</h4>
+                </div>
+
+                <div class="card-body">
+                  <div class="contenedor">
+                    <img src="imagenes/descarga.jpg" class="imagen-principal" alt="Imagen Principal">
+                    <img src="imagenes/descarga (3).jpg" class="imagen-hover" alt="Imagen Hover">
+                  </div>
+                  <h1 class="card-title pricing-card-title">$ 801.999 <br> <small class="text-muted">14% OFF</small>
+                  </h1>
+                  <p class="card-text">Ultrabook gamer 15-fc0037wm 15.6" color azul 8GB de Ram - 256GB SSD - AMD Ryzen 5
+                  </p>
+                  <div class="card-footer">
+                    <a type="button" class="btn btn-custom-secondary" target="_blank"
+                      href="https://www.mercadolibre.com.ar/ultrabook-gamer-15-fc0037wm-156-color-azul-8gb-de-ram-256gb-ssd-amd-ryzen-5/p/MLA33783344?pdp_filters=item_id:MLA2021165450#is_advertising=true&searchVariation=MLA33783344&position=1&search_layout=stack&type=pad&tracking_id=34d75327-0270-46ea-b901-20c3e3434536&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=1&ad_click_id=NWEyNjQyNzgtZTUyMC00N2Q0LThiZWItYzUzYzU5OTNiOWUx">
+                      Comprar<i class="bi bi-cart" style="padding-left: 5px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 5 (Duplicate of Card 2) -->
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Diseño</h4>
+                </div>
+
+                <div class="card-body">
+                  <div class="contenedor">
+                    <img src="imagenes/descarga.jpg" class="imagen-principal" alt="Imagen Principal">
+                    <img src="imagenes/descarga (3).jpg" class="imagen-hover" alt="Imagen Hover">
+                  </div>
+                  <h1 class="card-title pricing-card-title">$ 801.999 <br> <small class="text-muted">14% OFF</small>
+                  </h1>
+                  <p class="card-text">Ultrabook gamer 15-fc0037wm 15.6" color azul 8GB de Ram - 256GB SSD - AMD Ryzen 5
+                  </p>
+                  <div class="card-footer">
+                    <a type="button" class="btn btn-custom-secondary" target="_blank"
+                      href="https://www.mercadolibre.com.ar/ultrabook-gamer-15-fc0037wm-156-color-azul-8gb-de-ram-256gb-ssd-amd-ryzen-5/p/MLA33783344?pdp_filters=item_id:MLA2021165450#is_advertising=true&searchVariation=MLA33783344&position=1&search_layout=stack&type=pad&tracking_id=34d75327-0270-46ea-b901-20c3e3434536&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=1&ad_click_id=NWEyNjQyNzgtZTUyMC00N2Q0LThiZWItYzUzYzU5OTNiOWUx">
+                      Comprar<i class="bi bi-cart" style="padding-left: 5px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 6 (Duplicate of Card 3) -->
+            <div class="col-12 col-md-4">
+              <!-- Incluir el contenido de la sexta tarjeta -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  
+
+  <div class="neon-basico-fusionado" style="margin-left:40px; margin-right: 40px; padding: 15px;"><h1>Las mejores opciones en PC Gamer</h1></div>
+
+ 
+  <div class="image-container" style="padding-top: 25px;">
+    <img src="imagenes/pc1.jpg"
+      alt="Imagen 1">
+    <img
+      src="imagenes/pc2.jpg"
+      alt="Imagen 2">
+  </div>
+
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Ajusta el tamaño del iframe de pagina Index -->
+  <script>
+    // Función para enviar las dimensiones de la página al contenedor
+    function enviarDimensiones() {
+      const width = document.documentElement.scrollWidth;
+      const height = document.documentElement.scrollHeight;
+
+      // Enviar las dimensiones al parent (la página principal)
+      window.parent.postMessage({
+        type: 'iframe-dimensions',
+        width: width,
+        height: height
+      }, '*');  // Usamos '*' para permitir que cualquier origen reciba el mensaje, aunque en producción deberías especificar un dominio seguro
+    }
+
+    // Llamar a la función al cargar la página o cuando se redimensiona
+    window.addEventListener('load', enviarDimensiones);
+    window.addEventListener('resize', enviarDimensiones);  // Actualizar cuando la ventana se redimensiona
+  </script>
+</body>
+
+</html>

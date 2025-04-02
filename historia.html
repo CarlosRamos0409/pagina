@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            
+        }
+     
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-section {
+            padding: 10px;
+        }
+
+        .text-section h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .text-section p {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .image-section img {
+            width: 100%; /* Hace que las imágenes sean responsivas */
+            height: auto; /* Mantiene las proporciones */
+            max-height: 300px; /* Define una altura máxima para igualarlas */
+            object-fit: cover; /* Asegura que las imágenes se adapten dentro del contenedor */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media Query para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr; /* Una sola columna */
+            }
+
+            .image-section {
+                margin-top: 20px; /* Añade espacio entre texto e imágenes */
+            }
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <div class="container">
+        <div class="text-section">
+            <h2>Nuestra Historia</h2>
+            <p>Hace más de 20 años, en el corazón de Monte Cristo, nació nuestra pasión por la tecnología. Todo comenzó en un pequeño taller, donde la dedicación y el amor por la innovación nos llevaron a transformar simples desafíos en soluciones que marcaron la diferencia. Con cada computadora reparada, no solo restaurábamos equipos, sino también la confianza de nuestros clientes.</p>
+            <p>Desde nuestros primeros días, hemos crecido junto a nuestra comunidad, adaptándonos a los cambios vertiginosos del mundo tecnológico. Nuestra experiencia acumulada a lo largo de estas dos décadas nos ha convertido en referentes locales en reparación y mantenimiento de PCs. Hemos trabajado con hogares, pequeñas empresas y grandes organizaciones, brindando siempre un servicio personalizado, ético y de alta calidad.</p>
+        
+            <p>Pero nuestra verdadera fortaleza radica en nuestra relación con nuestros clientes. Nos hemos ganado su lealtad gracias a nuestro compromiso con la excelencia y nuestro esfuerzo constante por estar a la vanguardia de las innovaciones tecnológicas.</p>
+            
+            <p>Hoy, con más de 20 años de trayectoria, seguimos avanzando con la misma pasión y dedicación con la que comenzamos. Nuestra misión sigue siendo clara: ofrecer soluciones confiables y accesibles, mientras creamos relaciones sólidas basadas en la confianza. Gracias por ser parte de nuestro viaje. ¡El futuro nos espera, y lo construiremos juntos!</p>
+        </div>
+
+        <div class="image-section">
+            <img src="imagenes/taller.jpg" alt="Taller de Reparación">
+            <img src="imagenes/reparando.jpg" alt="Equipo Trabajando">
+        </div>
+    </div>
+<br>
+ <!-- Ajusta el tamaño del iframe de pagina Index -->
+ <script>
+    // Función para enviar las dimensiones de la página al contenedor
+    function enviarDimensiones() {
+      const width = document.documentElement.scrollWidth;
+      const height = document.documentElement.scrollHeight;
+
+      // Enviar las dimensiones al parent (la página principal)
+      window.parent.postMessage({
+        type: 'iframe-dimensions',
+        width: width,
+        height: height
+      }, '*');  // Usamos '*' para permitir que cualquier origen reciba el mensaje, aunque en producción deberías especificar un dominio seguro
+    }
+
+    // Llamar a la función al cargar la página o cuando se redimensiona
+    window.addEventListener('load', enviarDimensiones);
+    window.addEventListener('resize', enviarDimensiones);  // Actualizar cuando la ventana se redimensiona
+  </script>
+</body>
+</html>
